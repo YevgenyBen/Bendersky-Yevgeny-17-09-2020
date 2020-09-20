@@ -2,21 +2,19 @@ import React from 'react'
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 
+import WeatherIcon from './WeatherIcon'
+
 const useStyles = makeStyles(() => ({
     size: {
         height: '200px',
         width: '100%',
         backgroundColor: 'white',
-        display: 'flex',
-        flexDirection:'column',
-        // margin: '0px 10px'
     },
 }))
 
 const getDayOfTheWeek = (date) => {
-    let currentDate = new Date(date * 1000)
-    let days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
-    return days[currentDate.getDay()]
+    let day = new Date(date * 1000).toLocaleDateString('en-us', { weekday: 'long' })
+    return day
 }
 
 const getAverageTemp = (temp) => {
@@ -24,16 +22,20 @@ const getAverageTemp = (temp) => {
     return ((Math.round((avg + Number.EPSILON) * 100) / 100))
 }
 
-function ForecastCard({ temp, date }) {
+function ForecastCard({ temp, date,locationKey,location,iconNumber,isFavorite }) {
+    
     const classes = useStyles();
     return (
         <Paper className={classes.size}>
 
                 <div>
-                    {window.location.pathname=='/'?getDayOfTheWeek(date):'null'}
+                    {window.location.pathname=='/'?getDayOfTheWeek(date):locationKey}
                 </div>
                 <div>
-                    {window.location.pathname=='/'?getAverageTemp(temp):'null'}
+                    {window.location.pathname=='/'?getAverageTemp(temp):location}
+                </div>
+                <div>
+                    <WeatherIcon iconNumber={iconNumber}/>
                 </div>
 
         </Paper>

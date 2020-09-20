@@ -1,7 +1,7 @@
 import React from 'react'
 import {makeStyles} from '@material-ui/core/styles';
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles(({icon}) => ({
     size:{
         height:'100px',
         minWidth:'100px',
@@ -10,10 +10,12 @@ const useStyles = makeStyles(() => ({
 }))
 
 
-function WeatherIcon() {
+function WeatherIcon({iconNumber}) {
     const classes = useStyles();
     return (
-        <div className={classes.size +' icon'}>Icon</div>
+        <div className={classes.size +' icon'}>
+            <img src={`/icons/${iconNumber}.png`} />
+        </div>
     )
 }
 

@@ -1,8 +1,9 @@
 import React from 'react'
+import { useSelector } from "react-redux";
+
 import ForecastCard from '../components/ForecastCard'
 import {makeStyles} from '@material-ui/core/styles';
-//range import
-import {range} from 'lodash'
+
 const useStyles = makeStyles(() => ({
     container:{
         margin:'100px',
@@ -15,12 +16,12 @@ const useStyles = makeStyles(() => ({
 
 function FavoritesPage() {
     const classes = useStyles();
-    let array=range(7);
-    console.log(array)
+    const favorites = useSelector((state) => state.favoritesReducer);
+    console.log('favorites: ',favorites)
     return (
         <div className={classes.container}>
-            {array.map((index)=>
-                <ForecastCard key={index}/>
+            {favorites.map((item,index)=>
+                <ForecastCard key={index} locationKey={item.key} location={item.location}/>
             )}
         </div>
     )

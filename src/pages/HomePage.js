@@ -1,4 +1,6 @@
 import React, { useEffect } from 'react'
+import { useSelector } from "react-redux";
+
 import Search from '../components/Search'
 import FavoriteButton from '../components/FavoriteButton'
 import ForecastCard from '../components/ForecastCard'
@@ -21,9 +23,11 @@ import { fiveDayData } from './5dayData.json'
 
 function HomePage() {
 
-    const apiKey = '2Hc18OxAstuPAYeQAG7XMNPzwGaKSSir';
+    const apiKey = 'fzFHxdaWNFHH74i0Z3zyrBIvkc0cEmFm';
     const locationKey = '215854';
-    const location = 'Tel Aviv'
+    const location = 'Tel Aviv';
+    const favorites = useSelector((state) => state.favoritesReducer);
+    console.log('favorites: ', favorites)
 
     const getLocationKey = async (location) => {
         try {
@@ -61,7 +65,7 @@ function HomePage() {
         console.log(fiveDayData)
         // const locationKey = getLocationKey('tel-aviv');
         // console.log("location key", locationKey)
-        const locationKey = '215854';
+        // const locationKey = '215854';
         // const oneDayForecast= getLocationWeather(locationKey)
         // console.log("one day forcast", oneDayForecast)
 
@@ -72,19 +76,21 @@ function HomePage() {
             <Container maxWidth='lg'>
                 <Search />
                 <Paper>
-                <div className='wrapper'>
-                    <WeatherIcon />
-                    <FavoriteButton />
-                    <ForecastDate date={fiveDayData.DailyForecasts[0].EpochDate}/>
-                    <ForecastTemp temp={fiveDayData.DailyForecasts[0].Temperature}/>
-                    <Location location={location}/>
-                    <div className='forecast-card-holder'>
-                        {fiveDayData.DailyForecasts.map((item,index) =>
-                            <ForecastCard key={index} temp={item.Temperature} date={item.EpochDate}/>
-                        )}
-                    </div>
+                    <div className='wrapper'>
+                        <WeatherIcon iconNumber={fiveDayData.DailyForecasts[0].Day.Icon} />
+                        <FavoriteButton cityCode={locationKey} location={location} />
+                        <ForecastDate date={fiveDayData.DailyForecasts[0].EpochDate} />
+                        <ForecastTemp temp={fiveDayData.DailyForecasts[0].Temperature} />
+                        <Location location={location} />
+                        <div className='forecast-card-holder'>
+                            {fiveDayData.DailyForecasts.map((item, index) => {
+                                return <ForecastCard key={index} temp={item.Temperature} date={item.EpochDate} iconNumber={fiveDayData.DailyForecasts[0].Day.Icon}  />
+                            }
 
-                </div>
+                            )}
+                        </div>
+
+                    </div>
                 </Paper>
             </Container>
         </>
