@@ -1,8 +1,8 @@
 import React from 'react'
-import {range} from 'lodash'
-import FavoriteCard from '../components/FavoriteCard'
+import ForecastCard from '../components/ForecastCard'
 import {makeStyles} from '@material-ui/core/styles';
-
+//range import
+import {range} from 'lodash'
 const useStyles = makeStyles(() => ({
     container:{
         margin:'100px',
@@ -19,9 +19,9 @@ function FavoritesPage() {
     console.log(array)
     return (
         <div className={classes.container}>
-            {array.map((index)=>{
-               return <FavoriteCard key={index}/>
-            })}
+            {array.map((index)=>
+                <ForecastCard key={index}/>
+            )}
         </div>
     )
 }
