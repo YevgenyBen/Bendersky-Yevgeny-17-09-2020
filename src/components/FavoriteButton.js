@@ -4,7 +4,7 @@ import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import IconButton from '@material-ui/core/IconButton';
 
-import  FavoriteActions  from "../actions/FavoriteActions";
+import FavoriteActions from "../actions/FavoriteActions";
 import { useDispatch } from "react-redux";
 
 const useStyles = makeStyles(() => ({
@@ -21,18 +21,25 @@ const useStyles = makeStyles(() => ({
 
 
 
-function FavoriteButton({cityCode,location}) {
+function FavoriteButton({ locationKey, location, isFavorite }) {
     const dispatch = useDispatch();
     const handleClick = () => {
+        isFavorite?
+        dispatch(FavoriteActions['REMOVE_FAVORITE']({
+            locationKey: locationKey,
+            location: location
+        })):
         dispatch(FavoriteActions['ADD_FAVORITE']({
-            key:cityCode,
-            location:location
+            locationKey: locationKey,
+            location: location
         }))
     }
 
     const classes = useStyles();
     return (
-        <IconButton size='small' className={classes.button + ' fav'} onClick={handleClick}><FavoriteBorderIcon className={classes.icon} /></IconButton>
+        <IconButton size='small' className={classes.button + ' fav'} onClick={handleClick}>
+            {isFavorite ? <FavoriteIcon className={classes.icon} /> : <FavoriteBorderIcon className={classes.icon} />}
+        </IconButton>
     )
 }
 

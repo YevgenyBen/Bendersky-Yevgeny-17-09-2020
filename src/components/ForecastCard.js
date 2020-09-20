@@ -1,6 +1,7 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
+import {Convert} from '../helpers/Convert'
 
 import WeatherIcon from './WeatherIcon'
 
@@ -22,17 +23,18 @@ const getAverageTemp = (temp) => {
     return ((Math.round((avg + Number.EPSILON) * 100) / 100))
 }
 
-function ForecastCard({ temp, date,locationKey,location,iconNumber,isFavorite }) {
+function ForecastCard({temp, date,iconNumber,isFahrenheit}) {
     
     const classes = useStyles();
     return (
         <Paper className={classes.size}>
 
                 <div>
-                    {window.location.pathname=='/'?getDayOfTheWeek(date):locationKey}
+                    {getDayOfTheWeek(date)}
                 </div>
                 <div>
-                    {window.location.pathname=='/'?getAverageTemp(temp):location}
+                    {isFahrenheit?Convert(getAverageTemp(temp))+'\xB0F'
+            :getAverageTemp(temp)+'\xB0C'}
                 </div>
                 <div>
                     <WeatherIcon iconNumber={iconNumber}/>

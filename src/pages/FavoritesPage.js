@@ -1,8 +1,9 @@
 import React from 'react'
 import { useSelector } from "react-redux";
 
-import ForecastCard from '../components/ForecastCard'
+import FavoriteCard from '../components/FavoriteCard'
 import {makeStyles} from '@material-ui/core/styles';
+
 
 const useStyles = makeStyles(() => ({
     container:{
@@ -10,18 +11,20 @@ const useStyles = makeStyles(() => ({
         display:'flex',
         flexDirection: 'row',
         flexWrap:'wrap',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        
     }
 }))
 
 function FavoritesPage() {
     const classes = useStyles();
     const favorites = useSelector((state) => state.favoritesReducer);
+    const isFahrenheit = useSelector((state) => state.tempReducer.Fahrenheit);
     console.log('favorites: ',favorites)
     return (
         <div className={classes.container}>
             {favorites.map((item,index)=>
-                <ForecastCard key={index} locationKey={item.key} location={item.location}/>
+                <FavoriteCard key={index} locationKey={item.locationKey} location={item.location} isFahrenheit={isFahrenheit}/>
             )}
         </div>
     )

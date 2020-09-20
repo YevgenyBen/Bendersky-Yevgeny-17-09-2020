@@ -5,7 +5,6 @@ const useStyles = makeStyles(({icon}) => ({
     size:{
         height:'100px',
         minWidth:'100px',
-        margin:'10px'
     },
 }))
 
@@ -13,9 +12,9 @@ const useStyles = makeStyles(({icon}) => ({
 function WeatherIcon({iconNumber}) {
     const classes = useStyles();
     return (
-        <div className={classes.size +' icon'}>
+
             <img src={`/icons/${iconNumber}.png`} />
-        </div>
+
     )
 }
 
