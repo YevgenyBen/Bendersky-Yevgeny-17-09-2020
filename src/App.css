@@ -2,7 +2,7 @@
   text-align: center;
 }
 body{
-  background-color: rgb(2, 80, 60);
+  background-color: rgb(236, 236, 236);
 }
 .App-logo {
   height: 40vmin;
@@ -14,6 +14,13 @@ body{
     animation: App-logo-spin infinite 20s linear;
   }
 }
+
+body {
+  margin: 0;
+  font-family: 'Roboto' ;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
 .App-header {
   background-color: #282c34;

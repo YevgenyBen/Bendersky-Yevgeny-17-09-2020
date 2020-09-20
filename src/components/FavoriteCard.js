@@ -7,7 +7,7 @@ import swal from 'sweetalert';
 import { useDispatch } from "react-redux";
 import CurrentLocationActions from '../actions/CurrentLocationActions'
 import { useHistory } from 'react-router-dom'
-import { Convert } from '../helpers/Convert'
+import { CelsiusToFahrenheit } from '../helpers/Convert'
 
 const useStyles = makeStyles(() => ({
     size: {
@@ -16,7 +16,9 @@ const useStyles = makeStyles(() => ({
         backgroundColor: 'white',
         margin: '10px',
         cursor: 'pointer',
-        cursor: 'pointer',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
     },
 }))
 
@@ -42,12 +44,11 @@ function FavoriteCard({ location, locationKey,isFahrenheit }) {
                 })
 
             } catch (err) {
-                console.log("error on fetch one day forcast")
-                swal("error on fetch one day forcast")
+                swal("error fetching forcast,might have expired tries")
             }
         };
         getLocationWeather(locationKey)
-    }, [])
+    }, [locationKey])
 
     const handleClick = () => {
         dispatch(CurrentLocationActions['SET_LOCATION']({
@@ -65,13 +66,10 @@ function FavoriteCard({ location, locationKey,isFahrenheit }) {
                     className={classes.size}
                     onClick={handleClick}>
                     <div>
-                        LocationKey:{locationKey}
+                        {location}
                     </div>
                     <div>
-                        Location:{location}
-                    </div>
-                    <div>
-                        Temp:{forecast && isFahrenheit ? Convert(getAverageTemp(forecast.DailyForecasts[0].Temperature)) + '\xB0F'
+                        {forecast && isFahrenheit ? CelsiusToFahrenheit(getAverageTemp(forecast.DailyForecasts[0].Temperature)) + '\xB0F'
                             : getAverageTemp(forecast.DailyForecasts[0].Temperature) + '\xB0C'}
 
                     </div>

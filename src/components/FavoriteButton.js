@@ -14,8 +14,9 @@ const useStyles = makeStyles(() => ({
         margin: '10px'
     },
     icon: {
-        width: '90px',
-        height: '90px'
+        width: '50px',
+        height: '50px',
+        color:'white'
     }
 }))
 

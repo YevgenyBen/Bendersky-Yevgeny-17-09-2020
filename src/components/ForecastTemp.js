@@ -1,12 +1,13 @@
 import React from 'react'
 import {makeStyles} from '@material-ui/core/styles';
-import {Convert} from '../helpers/Convert'
+import {CelsiusToFahrenheit} from '../helpers/Convert'
 
 const useStyles = makeStyles(() => ({
     size:{
         height: '200px',
         width: '250px',
-        fontSize: '150px'
+        fontSize: '150px',
+
     },
 }))
 
@@ -19,7 +20,7 @@ function ForecastTemp({temp,isFahrenheit}) {
     const classes = useStyles();
     return (
         <div className={classes.size+' forecast-temp'}>
-            {isFahrenheit?Convert(getAverageTemp(temp))+'\xB0F'
+            {isFahrenheit?CelsiusToFahrenheit(getAverageTemp(temp))+'\xB0F'
             :getAverageTemp(temp)+'\xB0C'}
             </div>
     )
