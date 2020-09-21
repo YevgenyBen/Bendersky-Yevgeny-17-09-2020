@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
@@ -19,16 +19,13 @@ const useStyles = makeStyles((theme) => ({
   button: {
     margin: '10px',
     fontSize: '20px'
-    
   },
   active: {
-    fontSize: '25px',
-    fontWeight: 'bold',
-    textDecoration:'underline blue'
+    borderBottom: 'solid 2px black'
   }
 }));
 
-export default function Header({ }) {
+export default function Header() {
   const dispatch = useDispatch();
   const classes = useStyles();
   const [alignment, setAlignment] = useState('C');
@@ -49,8 +46,8 @@ export default function Header({ }) {
         Weather App
           </Typography>
       <div>
-      <Button onClick={toggleClass} className={selected==='HOME'?classes.active:''+classes.button} color="inherit"  component={Link} to='/'>Home</Button>
-      <Button onClick={toggleClass} className={selected==='FAVORITES'?classes.active:''+classes.button} color="inherit"  component={Link} to='favorites'>Favorites</Button>
+      <Button onClick={toggleClass} className={ selected==='HOME'?classes.active:'' } color="inherit"  component={Link} to='/'>Home</Button>
+      <Button onClick={toggleClass} className={ selected==='FAVORITES'?classes.active:'' } color="inherit"  component={Link} to='favorites'>Favorites</Button>
       </div>
       <ToggleButtonGroup
         value={alignment}

@@ -25,7 +25,6 @@ function FavoritesPage() {
     const classes = useStyles();
     const favorites = useSelector((state) => state.favoritesReducer);
     const isFahrenheit = useSelector((state) => state.tempReducer.Fahrenheit);
-    console.log('favorites: ', favorites)
     return (
         <div>
             <div className={classes.subHeader}>

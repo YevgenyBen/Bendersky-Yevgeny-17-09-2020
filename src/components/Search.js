@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import CurrentLocationActions from "../actions/CurrentLocationActions";
+import axios from 'axios'
 
 import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import TextField from "@material-ui/core/TextField";
-import { autocomplete } from "./autocomplete.json";
 import swal from "sweetalert";
 
 const useStyles = makeStyles(() => ({
@@ -35,26 +35,21 @@ export default function Search() {
     const classes = useStyles();
 
     async function handleInputChange(event) {
-        // console.log(event.target.value)
-        try {
-            // let response = await axios.get(`https://dataservice.accuweather.com/locations/v1/cities/autocomplete?apikey=2Hc18OxAstuPAYeQAG7XMNPzwGaKSSir&q=${event.target.value}`)
-            let response = autocomplete;
-            // console.log(response)
-            let fullList = [
-                {
-                    locationKey: "",
-                    location: "",
-                },
-            ];
-            response.map((item) => {
-                return fullList.push({
-                    locationKey: item.Key,
-                    location: item.LocalizedName,
+        if (event.target.value != 0) {
+            try {
+                let response = await axios.get(`https://dataservice.accuweather.com/locations/v1/cities/autocomplete?apikey=2Hc18OxAstuPAYeQAG7XMNPzwGaKSSir&q=${event.target.value}`)
+                let fullList = [];
+                response.data.map((item) => {
+                    return fullList.push({
+                        locationKey: item.Key,
+                        location: item.LocalizedName,
+                    });
                 });
-            });
-            setCities(fullList);
-        } catch (err) {
-            swal("error on fetch location key");
+                setCities(fullList);
+                console.log("fullList", fullList)
+            } catch (err) {
+                swal("error on auto complete");
+            }
         }
     }
 
@@ -66,7 +61,7 @@ export default function Search() {
         if (selected !== undefined) {
             dispatch(
                 CurrentLocationActions["SET_LOCATION"](
-                    cities.find((item) => item.location === selected)
+                    cities.find((item) => item.location == selected)
                 )
             );
         }
@@ -76,7 +71,7 @@ export default function Search() {
         <div className={classes.root}>
             <div className={classes.searchBar}>
                 <Autocomplete
-                    className={classes.searchBox+' search-bar'}
+                    className={classes.searchBox + ' search-bar'}
                     id="city-search"
                     onInputChange={handleInputChange}
                     onChange={handleSelectionChange}

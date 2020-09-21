@@ -21,8 +21,8 @@ function ForecastTemp({ temp, isFahrenheit }) {
     return (
         <div className={classes.size + ' forecast-temp'}>
             {isFahrenheit
-                ? CelsiusToFahrenheit(getAverageTemp(temp)) + '\xB0'
-                : getAverageTemp(temp) + '\xB0'
+                ? CelsiusToFahrenheit(getAverageTemp(temp)) + '\xB0F'
+                : getAverageTemp(temp) + '\xB0C'
             }
         </div>
     )

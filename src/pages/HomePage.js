@@ -10,7 +10,6 @@ import ApiAccess from '../api/ApiAccess'
 
 import Container from '@material-ui/core/Container';
 import Paper from '@material-ui/core/Paper';
-import { CSSTransition } from 'react-transition-group';
 import swal from 'sweetalert';
 
 import './HomePage.css'
@@ -19,9 +18,7 @@ function HomePage() {
     const dispatch = useDispatch();
     const [fiveDayData, SetFiveDayData] = useState()
     const favorites = useSelector((state) => state.favoritesReducer);
-    // console.log('favorites: ', favorites)
     const current = useSelector((state) => state.currentLocationReducer);
-    // console.log("current", current);
     const isFahrenheit = useSelector((state) => state.tempReducer.Fahrenheit);
 
     useEffect(() => {
@@ -33,7 +30,6 @@ function HomePage() {
         } else {
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition((position) => {
-                    console.log("latitude", position.coords.latitude, "longtitude", position.coords.longitude)
                     ApiAccess.getLocationKeyFromGeo(position.coords.latitude, position.coords.longitude)
                         .then((location => {
                             dispatch(CurrentLocationActions['SET_LOCATION'](
@@ -45,7 +41,6 @@ function HomePage() {
                         })).catch(err => {
                             swal('error in geo location')
                         })
-
                 })
             } else {
                 ApiAccess.getLocationKey("tel aviv")

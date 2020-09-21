@@ -24,12 +24,9 @@ const ApiAccess = {
         }
     },
     getFiveDayForecast: async (locationKey) => {
-        // console.log("incoming key", locationKey)
         try {
             let response = await axios.get(process.env.REACT_APP_GET_LOCATION_WEATHER_FIVE_DAY + locationKey + `?apikey=${apiKey}&metric=true`)
-            console.log("response", response)
             return response.data;
-
         } catch (err) {
             swal("error on fetch five day forcast")
         }
@@ -38,7 +35,6 @@ const ApiAccess = {
     getLocationKeyFromGeo: async (latitude, longtitude) => {
         try {
             let response = await axios.get(process.env.REACT_APP_GET_GEO_LOCATION + apiKey + `&q=${latitude},${longtitude}`)
-            console.log("response", response)
             return response.data;
         } catch (err) {
             swal("error on fetch key from geo");

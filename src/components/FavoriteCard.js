@@ -38,7 +38,6 @@ function FavoriteCard({ location, locationKey, isFahrenheit }) {
 
     useEffect(() => {
         ApiAccess.getLocationWeather(locationKey).then(response => {
-            console.log("response in card", response)
             setForcast(response)
         })
     }, [locationKey])
