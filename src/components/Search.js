@@ -9,6 +9,8 @@ import Autocomplete from "@material-ui/lab/Autocomplete";
 import TextField from "@material-ui/core/TextField";
 import swal from "sweetalert";
 
+const apiKey = process.env.REACT_APP_API_KEY;
+
 const useStyles = makeStyles(() => ({
     root: {
         width: "100%",
@@ -35,9 +37,9 @@ export default function Search() {
     const classes = useStyles();
 
     async function handleInputChange(event) {
-        if (event.target.value != 0) {
+        if (event.target.value !== 0) {
             try {
-                let response = await axios.get(`https://dataservice.accuweather.com/locations/v1/cities/autocomplete?apikey=2Hc18OxAstuPAYeQAG7XMNPzwGaKSSir&q=${event.target.value}`)
+                let response = await axios.get(process.env.REACT_APP_AUTOCOMPLETE + apiKey + `&q=${event.target.value}`)
                 let fullList = [];
                 response.data.map((item) => {
                     return fullList.push({
@@ -46,7 +48,6 @@ export default function Search() {
                     });
                 });
                 setCities(fullList);
-                console.log("fullList", fullList)
             } catch (err) {
                 swal("error on auto complete");
             }
@@ -54,18 +55,27 @@ export default function Search() {
     }
 
     function handleSelectionChange(event) {
-        event.target.tagName=='LI'?setSelected(event.target.innerText):setSelected(undefined)
+        event.target.tagName === 'LI' && setSelected(event.target.innerText)
     }
 
     function handleClick() {
         if (selected !== undefined) {
-            dispatch(
-                CurrentLocationActions["SET_LOCATION"](
-                    cities.find((item) => item.location == selected)
+            let locationAndKey = cities.find((item) => item.location === selected)
+            console.log("locationAndKey", locationAndKey)
+            if (locationAndKey) {
+                dispatch(
+                    CurrentLocationActions["SET_LOCATION"](locationAndKey)
                 )
-            );
-        }else{
-            swal("something went wrong with the search, did you use the keyboard to select? that doesnt work very well");
+            }
+
+        }
+    }
+
+    const handleHighlight = (event, option, reason) => {
+        if (option) {
+            if (reason === 'keyboard') {
+                setSelected(option.location)
+            }
         }
     }
 
@@ -79,6 +89,7 @@ export default function Search() {
                     onChange={handleSelectionChange}
                     noOptionsText="No result"
                     options={cities}
+                    onHighlightChange={handleHighlight}
                     popupIcon={null}
                     getOptionSelected={(option) => option}
                     getOptionLabel={(option) => option.location}
