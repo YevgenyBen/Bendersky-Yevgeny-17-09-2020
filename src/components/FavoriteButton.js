@@ -78,7 +78,7 @@ function FavoriteButton({ locationKey, location, isFavorite }) {
             <ToastContainer
                 position="top-right"
                 autoClose={2000}
-                hideProgressBar={true}
+                hideProgressBar={false}
                 newestOnTop={false}
                 closeOnClick
                 rtl={false}
