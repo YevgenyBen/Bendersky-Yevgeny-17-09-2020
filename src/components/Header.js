@@ -46,8 +46,8 @@ export default function Header() {
         Weather App
           </Typography>
       <div>
-      <Button onClick={toggleClass} className={ selected==='HOME'?classes.active:'' } color="inherit"  component={Link} to='/'>Home</Button>
-      <Button onClick={toggleClass} className={ selected==='FAVORITES'?classes.active:'' } color="inherit"  component={Link} to='favorites'>Favorites</Button>
+      <Button onClick={toggleClass} className={ (selected==='HOME'?classes.active+' ':'')+classes.button } color="inherit"  component={Link} to='/'>Home</Button>
+      <Button onClick={toggleClass} className={ (selected==='FAVORITES'?classes.active+' ':'')+classes.button } color="inherit"  component={Link} to='favorites'>Favorites</Button>
       </div>
       <ToggleButtonGroup
         value={alignment}
