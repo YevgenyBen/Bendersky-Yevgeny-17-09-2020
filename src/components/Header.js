@@ -9,6 +9,7 @@ import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
 import { useDispatch } from "react-redux";
 import TempActions from '../actions/TempActions'
 
+
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
@@ -29,7 +30,7 @@ export default function Header() {
   const dispatch = useDispatch();
   const classes = useStyles();
   const [alignment, setAlignment] = useState('C');
-  const [selected,setSelected] = useState(window.location.pathname==='/'?'HOME':'FAVORITES')
+  const [selected, setSelected] = useState(window.location.pathname === '/' ? 'HOME' : 'FAVORITES')
 
 
   const handleAlignment = (event, newAlignment) => {
@@ -37,17 +38,17 @@ export default function Header() {
     setAlignment(newAlignment);
   };
 
-  const toggleClass=(event)=>{
+  const toggleClass = (event) => {
     setSelected(event.target.innerText)
   }
   return (
-    <Toolbar className={classes.root+' header'}>
+    <Toolbar className={classes.root + ' header'}>
       <Typography variant="h6" className={classes.title}>
         Weather App
           </Typography>
       <div>
-      <Button onClick={toggleClass} className={ (selected==='HOME'?classes.active+' ':'')+classes.button } color="inherit"  component={Link} to='/'>Home</Button>
-      <Button onClick={toggleClass} className={ (selected==='FAVORITES'?classes.active+' ':'')+classes.button } color="inherit"  component={Link} to='favorites'>Favorites</Button>
+        <Button onClick={toggleClass} className={(selected === 'HOME' ? classes.active + ' ' : '') + classes.button} color="inherit" component={Link} to='/'>Home</Button>
+        <Button onClick={toggleClass} className={(selected === 'FAVORITES' ? classes.active + ' ' : '') + classes.button} color="inherit" component={Link} to='favorites'>Favorites</Button>
       </div>
       <ToggleButtonGroup
         value={alignment}
