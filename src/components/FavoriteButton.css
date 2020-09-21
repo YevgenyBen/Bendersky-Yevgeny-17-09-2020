@@ -1,0 +1,18 @@
+.favorite-button-enter {
+    opacity: 0.01;
+  }
+ 
+  .favorite-button-enter.favorite-button-enter-active {
+    opacity: 1;
+    transition: opacity 500ms ease-in;
+  }
+
+ .favorite-button-exit {
+    opacity: 1;
+  }
+ 
+
+ .favorite-button-exit.favorite-button-exit-active {
+    opacity: 0.01;
+    transition: opacity 300ms ease-in;
+  }

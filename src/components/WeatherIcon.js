@@ -1,20 +1,8 @@
 import React from 'react'
-import {makeStyles} from '@material-ui/core/styles';
 
-const useStyles = makeStyles(({icon}) => ({
-    size:{
-        height:'100px',
-        minWidth:'100px',
-    },
-}))
-
-
-function WeatherIcon({iconNumber}) {
-    const classes = useStyles();
+function WeatherIcon({ iconNumber }) {
     return (
-
-            <img src={`/icons/${iconNumber}.png`} />
-
+        <img src={`/icons/${iconNumber}.png`} alt='weather-icon'/>
     )
 }
 

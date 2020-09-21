@@ -1,9 +1,9 @@
 import React from 'react'
-import {makeStyles} from '@material-ui/core/styles';
-import {CelsiusToFahrenheit} from '../helpers/Convert'
+import { makeStyles } from '@material-ui/core/styles';
+import { CelsiusToFahrenheit } from '../helpers/Convert'
 
 const useStyles = makeStyles(() => ({
-    size:{
+    size: {
         height: '200px',
         width: '250px',
         fontSize: '150px',
@@ -12,17 +12,19 @@ const useStyles = makeStyles(() => ({
 }))
 
 const getAverageTemp = (temp) => {
-    let avg = (parseInt(temp.Maximum.Value) + parseInt(temp.Minimum.Value))/2
+    let avg = (parseInt(temp.Maximum.Value) + parseInt(temp.Minimum.Value)) / 2
     return ((Math.round((avg + Number.EPSILON) * 100) / 100))
 }
 
-function ForecastTemp({temp,isFahrenheit}) {
+function ForecastTemp({ temp, isFahrenheit }) {
     const classes = useStyles();
     return (
-        <div className={classes.size+' forecast-temp'}>
-            {isFahrenheit?CelsiusToFahrenheit(getAverageTemp(temp))+'\xB0F'
-            :getAverageTemp(temp)+'\xB0C'}
-            </div>
+        <div className={classes.size + ' forecast-temp'}>
+            {isFahrenheit
+                ? CelsiusToFahrenheit(getAverageTemp(temp)) + '\xB0'
+                : getAverageTemp(temp) + '\xB0'
+            }
+        </div>
     )
 }
 

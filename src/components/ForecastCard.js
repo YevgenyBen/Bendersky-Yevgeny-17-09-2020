@@ -13,12 +13,12 @@ const useStyles = makeStyles(() => ({
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        justifyContent:'center'
+        justifyContent: 'center'
 
     },
-    day:{
-        marginBottom:'25px',
-        fontSize:'1.5rem'
+    section: {
+        marginBottom: '25px',
+        fontSize: '1.5rem'
     }
 }))
 
@@ -38,16 +38,20 @@ function ForecastCard({ temp, date, iconNumber, isFahrenheit }) {
     return (
         <Paper square className={classes.size}>
 
-            <div className={classes.day}>
+            <div className={classes.section}>
                 {getDayOfTheWeek(date)}
             </div>
-            <div className={classes.day}>
-            <WeatherIcon iconNumber={iconNumber} />
-               
+            <div className={classes.section}>
+                <WeatherIcon iconNumber={iconNumber} />
             </div>
             <div>
-               {isFahrenheit ? CelsiusToFahrenheit(getAverageTemp(temp)) + '\xB0F'
-                    : getAverageTemp(temp) + '\xB0C'}
+                {
+                    isFahrenheit
+                        ?
+                        CelsiusToFahrenheit(getAverageTemp(temp)) + '\xB0F'
+                        :
+                        getAverageTemp(temp) + '\xB0C'
+                }
             </div>
 
         </Paper>
