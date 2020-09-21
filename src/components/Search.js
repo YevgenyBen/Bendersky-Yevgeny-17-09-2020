@@ -54,7 +54,7 @@ export default function Search() {
     }
 
     function handleSelectionChange(event) {
-        setSelected(event.target.innerText);
+        event.target.tagName=='LI'?setSelected(event.target.innerText):setSelected(undefined)
     }
 
     function handleClick() {
@@ -64,6 +64,8 @@ export default function Search() {
                     cities.find((item) => item.location == selected)
                 )
             );
+        }else{
+            swal("something went wrong with the search, did you use the keyboard to select? that doesnt work very well");
         }
     }
 

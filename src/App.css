@@ -57,9 +57,16 @@ body {
   }
   .location{
     height: auto !important;
+    margin-top: 20px !important;
   }
   .search-bar{
     width: 200px !important;
+  }
+  .forecast-temp{
+    font-size: 100px !important;
+  }
+  .forecast-date{
+    height: auto !important;
   }
 }
 
